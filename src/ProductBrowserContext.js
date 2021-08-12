@@ -12,7 +12,7 @@ function ProductBrowserContext({
   filters = []
 }) {
   const [appliedFilters, setAppliedFilters] = useState({});
-  console.log(appliedFilters);
+  const [selectedProductId, setSelectedProductId] = useState();
 
   // In real life, this is handled on the server side
   const filteredProducts = useMemo(() => {
@@ -30,7 +30,9 @@ function ProductBrowserContext({
     products: filteredProducts,
     filters,
     appliedFilters,
-    setAppliedFilters
+    setAppliedFilters,
+    selectedProductId,
+    setSelectedProductId
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

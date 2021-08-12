@@ -39,16 +39,25 @@ function Filters() {
 }
 
 export function ProductBrowser() {
-  const { products } = useProductBrowser();
-  console.log(products);
+  const {
+    products,
+    setSelectedProductId,
+    selectedProductId
+  } = useProductBrowser();
   return (
     <Layout>
       <Filters />
       <ProductsGrid>
-        {products.map(({ name, id, price, color }) => {
+        {products.map(({ name, id, price, imageUrl }) => {
+          const selected = selectedProductId === id;
           return (
-            <Product key={id}>
-              <Product.Image color={color}></Product.Image>
+            <Product
+              key={id}
+              onMouseEnter={() => setSelectedProductId(id)}
+              onMouseLeave={() => setSelectedProductId(undefined)}
+              selected={selected}
+            >
+              <Product.Image src={imageUrl}></Product.Image>
               <Product.Name>{name}</Product.Name>
               <Product.Price>{formatCurrency(price)}</Product.Price>
             </Product>

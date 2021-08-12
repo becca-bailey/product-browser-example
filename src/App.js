@@ -12,7 +12,8 @@ function createProducts(count) {
       name: faker.commerce.productName(),
       price: faker.datatype.number(),
       color: faker.commerce.color(),
-      gender: sample(["W", "M"])
+      gender: sample(["W", "M"]),
+      imageUrl: faker.image.imageUrl(200, 200)
     };
   });
 }

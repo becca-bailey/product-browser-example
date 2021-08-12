@@ -4,6 +4,8 @@ export const Product = styled.div.attrs({ "data-testid": "product" })`
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 0.5rem;
+  border: 1px solid ${({ selected }) => (selected ? "blue" : "white")};
 `;
 
 const PlaceholderImage = styled.div`
@@ -12,9 +14,9 @@ const PlaceholderImage = styled.div`
   width: 10rem;
 `;
 
-function Image({ color, src, ...rest }) {
+function Image({ color, src, name, ...rest }) {
   if (src) {
-    return <image src={src} {...rest} />;
+    return <img alt={name} src={src} {...rest} />;
   }
   return <PlaceholderImage $color={color}></PlaceholderImage>;
 }
