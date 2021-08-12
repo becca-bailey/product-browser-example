@@ -16,34 +16,36 @@ const Layout = styled.main`
   grid-template-columns: 10rem auto;
 `;
 
-function Filters() {
-  const { setAppliedFilters, appliedFilters, filters } = useProductBrowser();
-  return (
-    <aside>
-      {filters.map(({ category, keyName, options, filterComponent }) => (
-        <ProductFilterContext
-          key={keyName}
-          onApply={(newValues) =>
-            setAppliedFilters({ ...appliedFilters, [keyName]: newValues })
-          }
-        >
-          <FilterDrawer
-            category={category}
-            options={options}
-            filterComponent={filterComponent}
-          ></FilterDrawer>
-        </ProductFilterContext>
-      ))}
-    </aside>
-  );
-}
-
 export function ProductBrowser() {
   const {
     products,
     setSelectedProductId,
-    selectedProductId
+    selectedProductId,
+    setAppliedFilters,
+    appliedFilters,
+    filters
   } = useProductBrowser();
+
+  function Filters() {
+    return (
+      <aside>
+        {filters.map(({ category, keyName, options, filterComponent }) => (
+          <ProductFilterContext
+            key={keyName}
+            onApply={(newValues) =>
+              setAppliedFilters({ ...appliedFilters, [keyName]: newValues })
+            }
+          >
+            <FilterDrawer
+              category={category}
+              options={options}
+              filterComponent={filterComponent}
+            ></FilterDrawer>
+          </ProductFilterContext>
+        ))}
+      </aside>
+    );
+  }
   return (
     <Layout>
       <Filters />

@@ -5,6 +5,12 @@ import faker from "faker";
 import { times, uniqWith, isEqual, sample } from "lodash";
 import { ColorFilter } from "./ColorFilter";
 
+// 1. Fork this repository
+// 2. Copy it to your github (using github tab on left)
+// 3. Clone it from github
+// 4. Run yarn and yarn start from the root to open in browser
+// 5. Fix the performance bugs, and note the differences you see in the profiler
+
 function createProducts(count) {
   return times(count, (n) => {
     return {
@@ -13,7 +19,7 @@ function createProducts(count) {
       price: faker.datatype.number(),
       color: faker.commerce.color(),
       gender: sample(["W", "M"]),
-      imageUrl: faker.image.imageUrl(200, 200)
+      imageUrl: faker.image.image(200, 200)
     };
   });
 }

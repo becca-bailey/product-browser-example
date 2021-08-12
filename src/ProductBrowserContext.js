@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useState } from "react";
 
 const Context = React.createContext();
 
@@ -15,7 +15,8 @@ function ProductBrowserContext({
   const [selectedProductId, setSelectedProductId] = useState();
 
   // In real life, this is handled on the server side
-  const filteredProducts = useMemo(() => {
+  // This should be wrapped in React.useMemo()
+  const getFilteredProducts = () => {
     return initialProducts.filter((product) => {
       return Object.entries(appliedFilters).every(([key, values]) => {
         if (!values.length) {
@@ -24,10 +25,10 @@ function ProductBrowserContext({
         return values.includes(product[key]);
       });
     });
-  }, [initialProducts, appliedFilters]);
+  };
 
   const value = {
-    products: filteredProducts,
+    products: getFilteredProducts(),
     filters,
     appliedFilters,
     setAppliedFilters,
